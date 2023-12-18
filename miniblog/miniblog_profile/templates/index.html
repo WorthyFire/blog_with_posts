@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница Микроблога</title>
+</head>
+<body>
+        <h1>Добро пожаловать на главную страницу Микроблога</h1>
+        {% if user.is_authenticated %}
+        <a href = "{% url 'profile' %}">Профиль пользователя</a>
+        <br>
+        <a href="{% url 'logout' %}">Выйти</a>
+        {% else %}
+        <div>
+            <a href="{% url 'login' %}">Авторизоваться</a>
+            <br>
+            <a href="{% url 'register' %}">Зарегистрироваться</a>
+        </div>
+
+    {% endif %}
+</body>
+</html>

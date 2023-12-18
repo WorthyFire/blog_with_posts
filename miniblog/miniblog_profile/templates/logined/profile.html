@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user.username }} - Профиль</title>
+</head>
+<body>
+    <h2>Профиль пользователя {{ user.username }}</h2>
+    <p>Имя: {{ user.userprofile.name }}</p>
+    <p>Информация: {{ user.userprofile.bio }}</p>
+    {% if user.userprofile.avatar %}
+        <img src="{{ user.userprofile.avatar.url }}" alt="Ваш аватар" style="max-width: 150px; max-height: 150px;">
+    {% else %}
+        <p>Аватар не загружен</p>
+    {% endif %}
+    <br>
+    <a href="{% url 'edit_profile' %}">Редактировать профиль</a>
+    <br>
+<a href="{% url 'index' %}">На главную</a>
+    <br>
+    <a href="{% url 'logout' %}">Выйти</a>
+</body>
+</html>
