@@ -1,13 +1,11 @@
-# Реалиазция проекта django-rest-framework <br>
+# Реалиазция проекта Блога с опросниками <br>
 1. Клонируйте репозиторий: <br>
-git clone https://github.com/WorthyFire/rest.git <br>
+git clone https://github.com/WorthyFire/blog_with_posts.git <br>
 2. Перейдите в директорию проекта: <br>
-cd tutorial<br>
+cd miniblog<br>
 3. Установите пакеты: <br>
    pip install django <br>
    pip install pillow <br>
-   pip install pygments <br>
-   pip install djangorestframework
 # Запуск <br>
 Запустите сервер: <br>
 python manage.py runserver <br>
