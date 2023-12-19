@@ -2,7 +2,7 @@
 1. Клонируйте репозиторий: <br>
 git clone https://github.com/WorthyFire/blog_with_posts.git <br>
 2. Перейдите в директорию проекта: <br>
-cd tutorial <br>
+cd miniblog<br>
 3. Установите пакеты: <br>
    pip install django <br>
    pip install pillow <br>
