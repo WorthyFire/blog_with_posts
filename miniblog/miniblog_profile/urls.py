@@ -12,6 +12,7 @@ urlpatterns = [
     path('edit_profile/', edit_profile, name='edit_profile'),
     path('logout/', LogoutView.as_view(next_page='index'), name='logout'),
     path('confirm_delete_account/', confirm_delete_account, name='confirm_delete_account'),
+
 ]
 
 if settings.DEBUG:

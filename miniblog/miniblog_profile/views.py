@@ -1,10 +1,12 @@
 import os
 
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.files import File
+
 from django.shortcuts import render, redirect
 
 from .forms import UserProfileForm, RegistrationForm
@@ -45,10 +47,7 @@ def login_view(request):
 
 @login_required
 def profile(request):
-    try:
-        user_profile = UserProfile.objects.get(user=request.user)
-    except UserProfile.DoesNotExist:
-        user_profile = UserProfile.objects.create(user=request.user)
+    user_profile, created = UserProfile.objects.get_or_create(user=request.user)
 
     return render(request, 'logined/profile.html', {'user_profile': user_profile})
 
