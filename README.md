@@ -1,11 +1,13 @@
-# Реалиазция проекта с постами <br>
+# Реалиазция проекта django-rest-framework <br>
 1. Клонируйте репозиторий: <br>
-git clone https://github.com/WorthyFire/blog_with_posts.git <br>
+git clone https://github.com/WorthyFire/rest.git <br>
 2. Перейдите в директорию проекта: <br>
-cd miniblog<br>
+cd tutorial<br>
 3. Установите пакеты: <br>
    pip install django <br>
    pip install pillow <br>
+   pip install pygments <br>
+   pip install djangorestframework
 # Запуск <br>
 Запустите сервер: <br>
 python manage.py runserver <br>
