@@ -1,12 +1,13 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная страница Микроблога</title>
+    <title>Главная страница сайта с постами пользователей</title>
 </head>
 <body>
-    <h1>Добро пожаловать на главную страницу Микроблога</h1>
+    <h1>Добро пожаловать на главную страницу сайта с постами</h1>
     {% if user.is_authenticated %}
         <a href="{% url 'profile' %}">Профиль пользователя</a>
         <br>
@@ -18,6 +19,43 @@
             <a href="{% url 'register' %}">Зарегистрироваться</a>
         </div>
     {% endif %}
-
+    <br>
+    <b>Посты пользователей:</b>
+    {% for post in posts %}
+        <div>
+            <br>
+            <li>Текст поста:</li>
+                <br>
+                {{ post.text }}</p>
+            <p>Пользователь:{{ post.user.username }}
+            {% if post.image %}
+                <p>Изображение поста:</p>
+                <img src="{{ post.image.url }}" alt="Изображение поста" style="max-width: 150px; max-height: 150px;">
+            {% endif %}
+             {% if request.user == post.user %}
+                <br>
+                <a href="{% url 'delete_post' post.id %}">Удалить пост</a>
+            {% endif %}
+            <h4>Комментарии:</h4>
+            {% for comment in post.comments.all %}
+                <p>{{ comment.user.username }} - {{ comment.text }}</p>
+                {% if comment.image %}
+                    <img src="{{ comment.image.url }}" alt="Изображение комментария" style="max-width: 150px; max-height: 150px;">
+                {% endif %}
+                {% if request.user == comment.user %}
+                    <a href="{% url 'delete_comment' comment.id %}">Удалить комментарий</a>
+                    <a href="{% url 'edit_comment' comment.id %}">Редактировать комментарий</a>
+                {% endif %}
+            {% endfor %}
+            {% if user.is_authenticated %}
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <input type="hidden" name="post_id" value="{{ post.id }}">
+                <button type="submit">Добавить комментарий</button>
+            </form>
+            {% endif %}
+        </div>
+    {% endfor %}
 </body>
 </html>

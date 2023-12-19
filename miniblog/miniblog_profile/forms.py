@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
-from .models import UserProfile
+from .models import UserProfile, Comment, Post
 
 
 class RegistrationForm(UserCreationForm):
@@ -37,3 +37,24 @@ class UserProfileForm(forms.ModelForm):
                 if avatar.size > 2 * 1024 * 1024:
                     raise ValidationError(('Размер файла должен быть не более 2 МБ.'))
             return avatar
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['text', 'image']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text', 'image']
+        labels = {
+            'text': 'Текст комментария',
+            'image': 'Прикрепить изображение',
+        }
+
+        def clean_image(self):
+            image = self.cleaned_data.get('image', False)
+            if image:
+                if image.size > 2 * 1024 * 1024:
+                    raise ValidationError('Размер файла должен быть не более 2 МБ.')
+            return image

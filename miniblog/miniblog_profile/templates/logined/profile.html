@@ -1,3 +1,4 @@
+<!-- profile.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,11 +16,27 @@
         <p>Аватар не загружен</p>
     {% endif %}
     <br>
+    <a href="{% url 'create_post' %}">Создать пост</a>
+    <br>
     <a href="{% url 'edit_profile' %}">Редактировать профиль</a>
+    <br>
+    <h3>Ваши посты:</h3>
+    {% for post in user_posts %}
+    <li>Текст поста:</li>
+        <div>
+            <p>{{ post.text }}</p>
+            {% if post.image %}
+                <p>Изображение поста:</p>
+                <img src="{{ post.image.url }}" alt="Изображение поста" style="max-width: 150px; max-height: 150px;">
+            {% endif %}
+        </div>
+    {% if request.user == post.user %}
+                <a href="{% url 'delete_post' post.id %}">Удалить пост</a>
+            {% endif %}
+    {% endfor %}
     <br>
     <a href="{% url 'index' %}">На главную</a>
     <br>
     <a href="{% url 'logout' %}">Выйти</a>
 </body>
 </html>
-
